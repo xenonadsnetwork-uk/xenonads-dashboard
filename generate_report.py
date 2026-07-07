@@ -1,6 +1,7 @@
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
+import os
 import json
 import datetime
 import gzip
@@ -8,18 +9,27 @@ import csv
 import io
 from googleads import ad_manager
 
-# ---------- Config লোড করা ----------
+if os.environ.get('GAM_KEY_JSON'):
+    with open('gam-key.json', 'w', encoding='utf-8') as f:
+        f.write(os.environ['GAM_KEY_JSON'])
+
+    yaml_content = f"""ad_manager:
+  application_name: XenonAds Dashboard
+  network_code: {os.environ['GAM_NETWORK_CODE']}
+  path_to_private_key_file: gam-key.json
+"""
+    with open('googleads.yaml', 'w', encoding='utf-8') as f:
+        f.write(yaml_content)
+
 with open('config.json', 'r', encoding='utf-8') as f:
     config = json.load(f)
 
-# ---------- GAM কানেকশন ----------
 client = ad_manager.AdManagerClient.LoadFromStorage('googleads.yaml')
 report_downloader = client.GetDataDownloader(version='v202605')
 
 today = datetime.date.today()
 week_ago = today - datetime.timedelta(days=7)
 
-# ---------- একবারেই সব ad unit এর ডেটা টানা (efficient) ----------
 report_job = {
     'reportQuery': {
         'dimensions': ['DATE', 'AD_UNIT_NAME', 'AD_UNIT_ID'],
@@ -42,7 +52,6 @@ reader = csv.DictReader(io.StringIO(decompressed))
 raw_rows = list(reader)
 print(f"Fetched {len(raw_rows)} rows from GAM.")
 
-# ---------- Ad unit ID অনুযায়ী রেভিনিউ/ইমপ্রেশন যোগ করা ----------
 totals_by_adunit = {}
 
 for row in raw_rows:
@@ -50,7 +59,7 @@ for row in raw_rows:
     impressions = int(row.get('Column.AD_SERVER_IMPRESSIONS', 0) or 0)
     clicks = int(row.get('Column.AD_SERVER_CLICKS', 0) or 0)
     revenue_micros = int(row.get('Column.AD_SERVER_CPM_AND_CPC_REVENUE', 0) or 0)
-    revenue = revenue_micros / 1_000_000  # GAM revenue micros এ আসে, তাই ভাগ করতে হয়
+    revenue = revenue_micros / 1_000_000
 
     if adunit_id not in totals_by_adunit:
         totals_by_adunit[adunit_id] = {'impressions': 0, 'clicks': 0, 'revenue': 0.0}
@@ -59,7 +68,6 @@ for row in raw_rows:
     totals_by_adunit[adunit_id]['clicks'] += clicks
     totals_by_adunit[adunit_id]['revenue'] += revenue
 
-# ---------- Config অনুযায়ী প্রতিটা সাইটের জন্য margin apply করে ফাইনাল ডেটা বানানো ----------
 output = {'generated_at': datetime.datetime.now().isoformat(), 'sites': []}
 
 for site in config['sites']:
@@ -82,7 +90,6 @@ for site in config['sites']:
         'ecpm': ecpm
     })
 
-# ---------- JSON ফাইলে সেভ ----------
 with open('dashboard_data.json', 'w', encoding='utf-8') as f:
     json.dump(output, f, indent=2, ensure_ascii=False)
 
