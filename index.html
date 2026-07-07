@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XenonAds — Publisher Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FBF8F4;
+    --paper: #FFFFFF;
+    --espresso: #2B1D14;
+    --espresso-soft: #4A362A;
+    --caramel: #8B5E3C;
+    --caramel-deep: #6E4A2E;
+    --gold: #C08A3E;
+    --line: #E9E1D6;
+    --muted: #8A7B6D;
+    --up: #4C7A5E;
+    --down: #B5533E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    font-family:'Inter',sans-serif;
+    color:var(--espresso);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1100px; margin:0 auto; padding:36px 24px 80px; }
+
+  .topbar{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:28px; flex-wrap:wrap; gap:16px;
+  }
+  .brandmark{ display:flex; align-items:center; gap:12px; }
+  .brandmark .dot{
+    width:34px;height:34px;border-radius:9px; background:#111;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; font-size:18px; color:#fff;
+  }
+  .brandmark h1{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .brandmark .sub{ font-size:12px; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; margin-top:2px; }
+
+  .updated{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    display:flex; align-items:center; gap:6px;
+  }
+  .pulse{ width:7px;height:7px;border-radius:50%; background:var(--up);
+    box-shadow:0 0 0 0 rgba(76,122,94,.5); animation:pulse 2s infinite; }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(76,122,94,.45);}
+    70%{box-shadow:0 0 0 6px rgba(76,122,94,0);}
+    100%{box-shadow:0 0 0 0 rgba(76,122,94,0);}
+  }
+
+  .site-block{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    padding:24px; margin-bottom:20px;
+  }
+  .site-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:18px; flex-wrap:wrap; gap:8px;
+  }
+  .site-head h2{ font-family:'Fraunces',serif; font-size:19px; font-weight:600; margin:0; }
+  .site-head .pub{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .kpi{ background:var(--cream); border:1px solid var(--line); border-radius:12px; padding:16px 16px 14px; }
+  .kpi .label{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; }
+  .kpi .value{ font-family:'Fraunces',serif; font-size:26px; font-weight:600; margin-top:6px; letter-spacing:-0.01em; }
+
+  .empty-note{
+    margin-top:14px; padding:12px 14px; border-radius:10px;
+    background:#FBF3E7; border:1px solid #EFDFC2; color:var(--espresso-soft);
+    font-size:12.5px; display:flex; align-items:center; gap:8px;
+  }
+
+  .summary{
+    background:var(--espresso); color:#fff; border-radius:16px; padding:24px;
+    margin-bottom:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  }
+  .summary .item .label{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; opacity:.65; }
+  .summary .item .value{ font-family:'Fraunces',serif; font-size:28px; font-weight:600; margin-top:4px; }
+
+  footer{
+    text-align:center; font-size:11.5px; color:var(--muted); margin-top:32px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  footer a{ color:var(--muted); }
+
+  .loading{ text-align:center; padding:80px 0; color:var(--muted); font-size:14px; }
+
+  @media (max-width:640px){
+    .kpis{ grid-template-columns:repeat(2,1fr); }
+    .summary{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brandmark">
+      <div class="dot">X</div>
+      <div>
+        <h1>XenonAds</h1>
+        <div class="sub">Publisher Revenue Dashboard</div>
+      </div>
+    </div>
+    <div class="updated"><span class="pulse"></span> <span id="updatedText">Loading…</span></div>
+  </div>
+
+  <div id="summaryContainer"></div>
+  <div id="sitesContainer"><div class="loading">Loading data…</div></div>
+
+  <footer>
+    xenonads.io &nbsp;·&nbsp; Support: <a href="mailto:rahad@xenonads.io">rahad@xenonads.io</a>
+  </footer>
+</div>
+
+<script>
+function fmtMoney(v){ return '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtNum(v){ return Number(v).toLocaleString('en-US'); }
+function timeAgo(iso){
+  const then = new Date(iso);
+  const diffMin = Math.round((Date.now() - then.getTime()) / 60000);
+  if(diffMin < 1) return 'Updated just now';
+  if(diffMin < 60) return 'Updated ' + diffMin + ' min ago';
+  const diffHr = Math.round(diffMin / 60);
+  return 'Updated ' + diffHr + ' hr ago';
+}
+
+async function loadDashboard(){
+  try{
+    const res = await fetch('dashboard_data.json?t=' + Date.now());
+    if(!res.ok) throw new Error('Data file not found');
+    const data = await res.json();
+
+    document.getElementById('updatedText').textContent = timeAgo(data.generated_at);
+
+    const sites = data.sites || [];
+    const sitesContainer = document.getElementById('sitesContainer');
+    const summaryContainer = document.getElementById('summaryContainer');
+
+    if(sites.length > 1){
+      const totalRevenue = sites.reduce((a,s)=>a+s.revenue,0);
+      const totalImpr = sites.reduce((a,s)=>a+s.impressions,0);
+      summaryContainer.innerHTML = `
+        <div class="summary">
+          <div class="item"><div class="label">Total Revenue</div><div class="value">${fmtMoney(totalRevenue)}</div></div>
+          <div class="item"><div class="label">Total Impressions</div><div class="value">${fmtNum(totalImpr)}</div></div>
+          <div class="item"><div class="label">Sites</div><div class="value">${sites.length}</div></div>
+        </div>`;
+    } else {
+      summaryContainer.innerHTML = '';
+    }
+
+    sitesContainer.innerHTML = sites.map(site => {
+      const isEmpty = site.impressions === 0;
+      return `
+        <div class="site-block">
+          <div class="site-head">
+            <h2>${site.site_name}</h2>
+            <div class="pub">${site.publisher_name}</div>
+          </div>
+          <div class="kpis">
+            <div class="kpi"><div class="label">Revenue</div><div class="value">${fmtMoney(site.revenue)}</div></div>
+            <div class="kpi"><div class="label">Impressions</div><div class="value">${fmtNum(site.impressions)}</div></div>
+            <div class="kpi"><div class="label">eCPM</div><div class="value">$${site.ecpm}</div></div>
+            <div class="kpi"><div class="label">CTR</div><div class="value">${site.ctr}%</div></div>
+          </div>
+          ${isEmpty ? `<div class="empty-note">No impressions recorded yet for this site — once it's live and approved, data will start appearing here automatically.</div>` : ''}
+        </div>`;
+    }).join('');
+
+  } catch(err){
+    document.getElementById('sitesContainer').innerHTML =
+      `<div class="loading">Couldn't load data right now. Please try again shortly.</div>`;
+    document.getElementById('updatedText').textContent = 'Update status unavailable';
+    console.error(err);
+  }
+}
+
+loadDashboard();
+setInterval(loadDashboard, 5 * 60 * 1000);
+</script>
+</body>
+</html>
