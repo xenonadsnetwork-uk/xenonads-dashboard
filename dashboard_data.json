@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-07-07T19:56:43.729823",
+  "sites": [
+    {
+      "publisher_name": "Publisher A",
+      "site_name": "Site A",
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    }
+  ]
+}
