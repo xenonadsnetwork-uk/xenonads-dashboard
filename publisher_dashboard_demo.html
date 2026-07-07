@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XenonAds — Publisher Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --cream: #FBF8F4;
+    --paper: #FFFFFF;
+    --espresso: #2B1D14;
+    --espresso-soft: #4A362A;
+    --caramel: #8B5E3C;
+    --caramel-deep: #6E4A2E;
+    --gold: #C08A3E;
+    --line: #E9E1D6;
+    --muted: #8A7B6D;
+    --up: #4C7A5E;
+    --down: #B5533E;
+    --site-a: #8B5E3C;
+    --site-b: #C08A3E;
+    --site-c: #4A362A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    font-family:'Inter',sans-serif;
+    color:var(--espresso);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:36px 28px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .brandmark{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brandmark .dot{
+    width:34px;height:34px;border-radius:9px;
+    background:#111111;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:18px;
+    color:#ffffff;
+    letter-spacing:0;
+  }
+  .brandmark h1{
+    font-family:'Fraunces',serif;
+    font-size:22px;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .brandmark .sub{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-top:2px;
+  }
+  .updated{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .pulse{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--up);
+    box-shadow:0 0 0 0 rgba(76,122,94,.5);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(76,122,94,.45);}
+    70%{box-shadow:0 0 0 6px rgba(76,122,94,0);}
+    100%{box-shadow:0 0 0 0 rgba(76,122,94,0);}
+  }
+
+  /* ---------- Control row: site blend + date range ---------- */
+  .controls{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:26px;
+    padding:14px 18px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .blend-label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+    margin-right:10px;
+  }
+  .blend{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .swatch{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 12px 7px 8px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--cream);
+    cursor:pointer;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--espresso-soft);
+    transition:all .18s ease;
+    user-select:none;
+  }
+  .swatch .chip{
+    width:14px;height:14px;border-radius:50%;
+    flex-shrink:0;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.5);
+    opacity:.35;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .swatch.active{
+    border-color:transparent;
+    background:var(--espresso);
+    color:#fff;
+  }
+  .swatch.active .chip{opacity:1; transform:scale(1.1);}
+  .swatch:hover{border-color:var(--caramel);}
+
+  .range{
+    display:flex;
+    gap:4px;
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px;
+  }
+  .range button{
+    border:none;
+    background:transparent;
+    padding:7px 15px;
+    font-size:12.5px;
+    font-weight:600;
+    font-family:'Inter',sans-serif;
+    color:var(--muted);
+    border-radius:999px;
+    cursor:pointer;
+    transition:all .18s ease;
+  }
+  .range button.active{
+    background:var(--espresso);
+    color:#fff;
+  }
+
+  /* ---------- KPI row ---------- */
+  .kpis{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:20px;
+  }
+  .kpi{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:20px 20px 16px;
+    position:relative;
+    overflow:hidden;
+  }
+  .kpi .label{
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:var(--muted);
+    font-weight:600;
+  }
+  .kpi .value{
+    font-family:'Fraunces',serif;
+    font-size:32px;
+    font-weight:600;
+    margin:8px 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .kpi .delta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:2px 8px;
+    border-radius:999px;
+  }
+  .delta.up{color:var(--up); background:rgba(76,122,94,.1);}
+  .delta.down{color:var(--down); background:rgba(181,83,62,.1);}
+  .kpi canvas{
+    position:absolute;
+    right:14px; bottom:14px;
+    width:88px !important; height:34px !important;
+    opacity:.85;
+  }
+
+  /* ---------- Panels ---------- */
+  .panel{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px 22px 12px;
+    margin-bottom:20px;
+  }
+  .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .panel-head h3{
+    font-family:'Fraunces',serif;
+    font-size:16px;
+    font-weight:600;
+    margin:0;
+  }
+  .panel-head .legend{
+    display:flex;
+    gap:14px;
+    font-size:11.5px;
+    color:var(--muted);
+  }
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .legend i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  .grid-2{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:20px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  th{
+    text-align:left;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--muted);
+    font-weight:600;
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  td{
+    padding:13px 12px;
+    border-bottom:1px solid var(--line);
+    font-weight:500;
+  }
+  tr:last-child td{border-bottom:none;}
+  td.site{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-weight:600;
+  }
+  td.site i{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  td.num{font-family:'IBM Plex Mono',monospace; font-size:12.5px;}
+
+  footer{
+    text-align:center;
+    font-size:11.5px;
+    color:var(--muted);
+    margin-top:28px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  @media (max-width:900px){
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .grid-2{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .kpis{grid-template-columns:1fr;}
+    .controls{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brandmark">
+      <div class="dot">X</div>
+      <div>
+        <h1>XenonAds</h1>
+        <div class="sub">Publisher Revenue Dashboard</div>
+      </div>
+    </div>
+    <div class="updated"><span class="pulse"></span> Live — last synced 4 min ago</div>
+  </div>
+
+  <div class="controls">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;">
+      <span class="blend-label">Sites</span>
+      <div class="blend" id="blend">
+        <div class="swatch active" data-site="all"><span class="chip" style="background:linear-gradient(135deg,var(--site-a),var(--site-b),var(--site-c));"></span>All sites</div>
+        <div class="swatch" data-site="a"><span class="chip" style="background:var(--site-a);"></span>DailyBrew.news</div>
+        <div class="swatch" data-site="b"><span class="chip" style="background:var(--site-b);"></span>FieldNotes.co</div>
+        <div class="swatch" data-site="c"><span class="chip" style="background:var(--site-c);"></span>Roastwire Sports</div>
+      </div>
+    </div>
+    <div class="range" id="range">
+      <button data-range="1">1D</button>
+      <button data-range="7" class="active">7D</button>
+      <button data-range="30">1M</button>
+      <button data-range="90">3M</button>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="label">Revenue</div>
+      <div class="value" id="kpiRevenue">$0</div>
+      <span class="delta up" id="kpiRevenueDelta">↑ 0%</span>
+      <canvas id="sparkRevenue"></canvas>
+    </div>
+    <div class="kpi">
+      <div class="label">Impressions</div>
+      <div class="value" id="kpiImpr">0</div>
+      <span class="delta up" id="kpiImprDelta">↑ 0%</span>
+      <canvas id="sparkImpr"></canvas>
+    </div>
+    <div class="kpi">
+      <div class="label">eCPM</div>
+      <div class="value" id="kpiEcpm">$0</div>
+      <span class="delta down" id="kpiEcpmDelta">↓ 0%</span>
+      <canvas id="sparkEcpm"></canvas>
+    </div>
+    <div class="kpi">
+      <div class="label">CTR</div>
+      <div class="value" id="kpiCtr">0%</div>
+      <span class="delta up" id="kpiCtrDelta">↑ 0%</span>
+      <canvas id="sparkCtr"></canvas>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h3>Revenue over time</h3>
+      <div class="legend" id="mainLegend"></div>
+    </div>
+    <canvas id="mainChart" height="90"></canvas>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Revenue share by site</h3></div>
+      <canvas id="shareChart" height="160"></canvas>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Device breakdown</h3></div>
+      <canvas id="deviceChart" height="160"></canvas>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h3>Site detail</h3></div>
+    <table>
+      <thead>
+        <tr><th>Site</th><th>Revenue</th><th>Impressions</th><th>eCPM</th><th>CTR</th><th>Fill rate</th></tr>
+      </thead>
+      <tbody id="siteTable"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    Sample data for demonstration — connect a live GAM data source to replace these numbers.<br>
+    xenonads.io &nbsp;·&nbsp; Support: <a href="mailto:rahad@xenonads.io" style="color:var(--muted);">rahad@xenonads.io</a>
+  </footer>
+</div>
+
+<script>
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = '#8A7B6D';
+
+const SITES = {
+  a: { name: 'DailyBrew.news', color: '#8B5E3C', base: 42 },
+  b: { name: 'FieldNotes.co', color: '#C08A3E', base: 27 },
+  c: { name: 'Roastwire Sports', color: '#4A362A', base: 61 }
+};
+
+function seededRandom(seed){
+  let s = seed;
+  return function(){
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+
+function genSeries(days, base, seed){
+  const rnd = seededRandom(seed);
+  let val = base;
+  const out = [];
+  for(let i=0;i<days;i++){
+    val = val + (rnd()-0.42) * (base*0.09);
+    val = Math.max(val, base*0.4);
+    out.push(val);
+  }
+  return out;
+}
+
+function labelsFor(days){
+  const out = [];
+  const now = new Date(2026,6,7);
+  for(let i=days-1;i>=0;i--){
+    const d = new Date(now);
+    d.setDate(d.getDate()-i);
+    if(days<=7) out.push(d.toLocaleDateString('en-US',{weekday:'short'}));
+    else if(days<=30) out.push(d.getDate()+'/'+(d.getMonth()+1));
+    else out.push(d.toLocaleDateString('en-US',{month:'short'}) + (d.getDate()<=7?' '+d.getDate():''));
+  }
+  return out;
+}
+
+let mainChart, shareChart, deviceChart, sparks = {};
+let currentRange = 7;
+let activeSites = ['a','b','c'];
+
+function fmtMoney(v){ return '$' + v.toLocaleString('en-US',{maximumFractionDigits:0}); }
+function fmtNum(v){ return v>=1000 ? (v/1000).toFixed(1)+'K' : Math.round(v); }
+
+function computeData(){
+  const days = currentRange;
+  const siteSeries = {};
+  Object.keys(SITES).forEach((k,idx)=>{
+    siteSeries[k] = genSeries(days, SITES[k].base * (days<=1?1:days<=7?1:days<=30?1:1), 7+idx*13+days);
+  });
+  return siteSeries;
+}
+
+function renderAll(){
+  const siteSeries = computeData();
+  const labels = labelsFor(currentRange);
+  const activeKeys = activeSites;
+
+  // ----- main chart datasets -----
+  const datasets = activeKeys.map(k=>({
+    label: SITES[k].name,
+    data: siteSeries[k],
+    borderColor: SITES[k].color,
+    backgroundColor: SITES[k].color + '22',
+    fill: activeKeys.length>1,
+    tension:0.4,
+    borderWidth:2.5,
+    pointRadius:0,
+    pointHoverRadius:4,
+  }));
+
+  if(mainChart) mainChart.destroy();
+  mainChart = new Chart(document.getElementById('mainChart'), {
+    type:'line',
+    data:{ labels, datasets },
+    options:{
+      responsive:true,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{ legend:{display:false},
+        tooltip:{
+          backgroundColor:'#2B1D14',
+          padding:10,
+          titleFont:{family:"'IBM Plex Mono'", size:11},
+          bodyFont:{family:"'Inter'", size:12},
+          callbacks:{ label: (ctx)=> ctx.dataset.label + ': ' + fmtMoney(ctx.parsed.y) }
+        }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{font:{size:11}} },
+        y:{ grid:{color:'#F0E9DF'}, ticks:{ callback:(v)=>'$'+v, font:{size:11} }, stacked:activeKeys.length>1 }
+      }
+    }
+  });
+
+  // legend under panel head
+  document.getElementById('mainLegend').innerHTML = activeKeys.map(k=>
+    `<span><i style="background:${SITES[k].color}"></i>${SITES[k].name}</span>`
+  ).join('');
+
+  // ----- KPI aggregation -----
+  let totalRevenue = 0, totalImpr = 0;
+  activeKeys.forEach(k=>{ siteSeries[k].forEach(v=> totalRevenue += v); });
+  totalImpr = totalRevenue * 415; // fabricated relation for demo
+  const ecpm = (totalRevenue / totalImpr) * 1000;
+  const ctr = 0.28 + (activeKeys.length*0.015);
+
+  document.getElementById('kpiRevenue').textContent = fmtMoney(totalRevenue);
+  document.getElementById('kpiImpr').textContent = fmtNum(totalImpr);
+  document.getElementById('kpiEcpm').textContent = '$'+ecpm.toFixed(2);
+  document.getElementById('kpiCtr').textContent = ctr.toFixed(2)+'%';
+
+  const deltas = {
+    rev: (Math.random()*14+2),
+    impr: (Math.random()*10+1),
+    ecpm: (Math.random()*8+1) * (Math.random()>0.4?1:-1),
+    ctr: (Math.random()*6+1) * (Math.random()>0.3?1:-1),
+  };
+  setDelta('kpiRevenueDelta', deltas.rev, true);
+  setDelta('kpiImprDelta', deltas.impr, true);
+  setDelta('kpiEcpmDelta', deltas.ecpm);
+  setDelta('kpiCtrDelta', deltas.ctr);
+
+  // ----- sparklines -----
+  makeSpark('sparkRevenue', activeKeys.reduce((a,k)=>a.map((v,i)=>v+siteSeries[k][i]),new Array(currentRange).fill(0)), '#8B5E3C');
+  makeSpark('sparkImpr', activeKeys.reduce((a,k)=>a.map((v,i)=>v+siteSeries[k][i]*415),new Array(currentRange).fill(0)), '#C08A3E');
+  makeSpark('sparkEcpm', genSeries(currentRange, 18, 99), '#4A362A');
+  makeSpark('sparkCtr', genSeries(currentRange, 0.3, 55), '#B5533E');
+
+  // ----- share donut -----
+  if(shareChart) shareChart.destroy();
+  const shareTotals = activeKeys.map(k=> siteSeries[k].reduce((a,b)=>a+b,0));
+  shareChart = new Chart(document.getElementById('shareChart'), {
+    type:'doughnut',
+    data:{
+      labels: activeKeys.map(k=>SITES[k].name),
+      datasets:[{ data: shareTotals, backgroundColor: activeKeys.map(k=>SITES[k].color), borderWidth:3, borderColor:'#fff' }]
+    },
+    options:{ plugins:{ legend:{ position:'bottom', labels:{ boxWidth:9, boxHeight:9, usePointStyle:true, pointStyle:'circle', font:{size:11.5} } } }, cutout:'62%' }
+  });
+
+  // ----- device donut -----
+  if(deviceChart) deviceChart.destroy();
+  deviceChart = new Chart(document.getElementById('deviceChart'), {
+    type:'doughnut',
+    data:{
+      labels:['Mobile','Desktop','Tablet'],
+      datasets:[{ data:[58,34,8], backgroundColor:['#8B5E3C','#C08A3E','#D9C7B0'], borderWidth:3, borderColor:'#fff' }]
+    },
+    options:{ plugins:{ legend:{ position:'bottom', labels:{ boxWidth:9, boxHeight:9, usePointStyle:true, pointStyle:'circle', font:{size:11.5} } } }, cutout:'62%' }
+  });
+
+  // ----- table -----
+  const tbody = document.getElementById('siteTable');
+  tbody.innerHTML = activeKeys.map(k=>{
+    const rev = siteSeries[k].reduce((a,b)=>a+b,0);
+    const impr = rev*415;
+    const e = (rev/impr)*1000;
+    const c = (0.24 + Math.random()*0.3);
+    const fill = (88 + Math.random()*10);
+    return `<tr>
+      <td class="site"><i style="background:${SITES[k].color}"></i>${SITES[k].name}</td>
+      <td class="num">${fmtMoney(rev)}</td>
+      <td class="num">${fmtNum(impr)}</td>
+      <td class="num">$${e.toFixed(2)}</td>
+      <td class="num">${c.toFixed(2)}%</td>
+      <td class="num">${fill.toFixed(1)}%</td>
+    </tr>`;
+  }).join('');
+}
+
+function setDelta(id, val, invertColorLogic){
+  const el = document.getElementById(id);
+  const positive = val >= 0;
+  el.textContent = (positive?'↑ ':'↓ ') + Math.abs(val).toFixed(1) + '%';
+  el.className = 'delta ' + (positive ? 'up' : 'down');
+}
+
+function makeSpark(id, data, color){
+  if(sparks[id]) sparks[id].destroy();
+  sparks[id] = new Chart(document.getElementById(id), {
+    type:'line',
+    data:{ labels:data.map((_,i)=>i), datasets:[{ data, borderColor:color, borderWidth:2, pointRadius:0, tension:0.4, fill:false }] },
+    options:{
+      responsive:false,
+      plugins:{legend:{display:false}, tooltip:{enabled:false}},
+      scales:{ x:{display:false}, y:{display:false} },
+      elements:{ line:{ borderJoinStyle:'round' } }
+    }
+  });
+}
+
+// ----- controls wiring -----
+document.getElementById('blend').addEventListener('click', (e)=>{
+  const swatch = e.target.closest('.swatch');
+  if(!swatch) return;
+  const site = swatch.dataset.site;
+  if(site === 'all'){
+    document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+    swatch.classList.add('active');
+    activeSites = ['a','b','c'];
+  } else {
+    document.querySelector('.swatch[data-site="all"]').classList.remove('active');
+    swatch.classList.toggle('active');
+    activeSites = Array.from(document.querySelectorAll('.swatch.active')).map(s=>s.dataset.site).filter(s=>s!=='all');
+    if(activeSites.length === 0){
+      document.querySelector('.swatch[data-site="all"]').classList.add('active');
+      activeSites = ['a','b','c'];
+    }
+  }
+  renderAll();
+});
+
+document.getElementById('range').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  document.querySelectorAll('#range button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRange = parseInt(btn.dataset.range);
+  renderAll();
+});
+
+renderAll();
+</script>
+</body>
+</html>

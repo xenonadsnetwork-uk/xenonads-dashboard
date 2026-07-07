@@ -1,0 +1,11 @@
+{
+  "sites": [
+    {
+      "publisher_name": "Publisher A",
+      "publisher_email": "example@publisher.com",
+      "site_name": "Site A",
+      "ad_unit_id": "PLACEHOLDER_ID_1",
+      "margin_share": 0.90
+    }
+  ]
+}
