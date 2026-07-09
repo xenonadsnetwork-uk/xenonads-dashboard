@@ -1,190 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XenonAds — Publisher Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream: #FBF8F4;
-    --paper: #FFFFFF;
-    --espresso: #2B1D14;
-    --espresso-soft: #4A362A;
-    --caramel: #8B5E3C;
-    --caramel-deep: #6E4A2E;
-    --gold: #C08A3E;
-    --line: #E9E1D6;
-    --muted: #8A7B6D;
-    --up: #4C7A5E;
-    --down: #B5533E;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--cream);
-    font-family:'Inter',sans-serif;
-    color:var(--espresso);
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{ max-width:1100px; margin:0 auto; padding:36px 24px 80px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XenonAds | Publisher Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0d0c0a;
+            --card-bg: #14120f;
+            --accent-brown: #a37f51;
+            --accent-brown-dim: #261f17;
+            --text-main: #f5f4f0;
+            --text-muted: #9e9b94;
+            --border-color: #24201a;
+        }
 
-  .topbar{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    margin-bottom:28px; flex-wrap:wrap; gap:16px;
-  }
-  .brandmark{ display:flex; align-items:center; gap:12px; }
-  .brandmark .dot{
-    width:34px;height:34px;border-radius:9px; background:#111;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces',serif; font-weight:700; font-size:18px; color:#fff;
-  }
-  .brandmark h1{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; margin:0; letter-spacing:-0.01em; }
-  .brandmark .sub{ font-size:12px; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; margin-top:2px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  .updated{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
-    display:flex; align-items:center; gap:6px;
-  }
-  .pulse{ width:7px;height:7px;border-radius:50%; background:var(--up);
-    box-shadow:0 0 0 0 rgba(76,122,94,.5); animation:pulse 2s infinite; }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(76,122,94,.45);}
-    70%{box-shadow:0 0 0 6px rgba(76,122,94,0);}
-    100%{box-shadow:0 0 0 0 rgba(76,122,94,0);}
-  }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
 
-  .site-block{
-    background:var(--paper); border:1px solid var(--line); border-radius:16px;
-    padding:24px; margin-bottom:20px;
-  }
-  .site-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-bottom:18px; flex-wrap:wrap; gap:8px;
-  }
-  .site-head h2{ font-family:'Fraunces',serif; font-size:19px; font-weight:600; margin:0; }
-  .site-head .pub{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-  .kpi{ background:var(--cream); border:1px solid var(--line); border-radius:12px; padding:16px 16px 14px; }
-  .kpi .label{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; }
-  .kpi .value{ font-family:'Fraunces',serif; font-size:26px; font-weight:600; margin-top:6px; letter-spacing:-0.01em; }
+        /* Header Style */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
 
-  .empty-note{
-    margin-top:14px; padding:12px 14px; border-radius:10px;
-    background:#FBF3E7; border:1px solid #EFDFC2; color:var(--espresso-soft);
-    font-size:12.5px; display:flex; align-items:center; gap:8px;
-  }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
 
-  .summary{
-    background:var(--espresso); color:#fff; border-radius:16px; padding:24px;
-    margin-bottom:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
-  }
-  .summary .item .label{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; opacity:.65; }
-  .summary .item .value{ font-family:'Fraunces',serif; font-size:28px; font-weight:600; margin-top:4px; }
+        .logo-icon {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #ffffff, var(--accent-brown));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  footer{
-    text-align:center; font-size:11.5px; color:var(--muted); margin-top:32px;
-    font-family:'IBM Plex Mono',monospace;
-  }
-  footer a{ color:var(--muted); }
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
 
-  .loading{ text-align:center; padding:80px 0; color:var(--muted); font-size:14px; }
+        .welcome-msg {
+            text-align: right;
+        }
 
-  @media (max-width:640px){
-    .kpis{ grid-template-columns:repeat(2,1fr); }
-    .summary{ flex-direction:column; }
-  }
-</style>
+        .welcome-msg p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .welcome-msg h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        /* Controls Area */
+        .controls-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .selector-box label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        .selector-box select {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'><path stroke='%23a37f51' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+        }
+
+        .selector-box select:focus {
+            border-color: var(--accent-brown);
+        }
+
+        .timestamp {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background-color: var(--accent-brown-dim);
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid rgba(163, 127, 81, 0.2);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+            border-radius: 6px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(163, 127, 81, 0.4);
+        }
+
+        .card-title {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-value {
+            font-family: 'Fraunces', serif;
+            font-size: 2.25rem;
+            font-weight: 500;
+        }
+
+        .card-value.revenue-val {
+            color: #ffffff;
+            border-left: 3px solid var(--accent-brown);
+            padding-left: 0.5rem;
+        }
+
+        /* Message screens */
+        .msg-screen {
+            text-align: center;
+            padding: 5rem 2rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .msg-screen h2 {
+            font-family: 'Fraunces', serif;
+            margin-bottom: 1rem;
+            color: var(--accent-brown);
+        }
+
+        .msg-screen p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="topbar">
-    <div class="brandmark">
-      <div class="dot">X</div>
-      <div>
-        <h1>XenonAds</h1>
-        <div class="sub">Publisher Revenue Dashboard</div>
-      </div>
+    <div class="container">
+        <div id="error-screen" class="msg-screen hidden">
+            <h2 id="error-title">Access Denied</h2>
+            <p id="error-desc">Please provide a valid publisher security key to access the dashboard.</p>
+        </div>
+
+        <div id="dashboard-content" class="hidden">
+            <header>
+                <div class="logo-area">
+                    <span class="logo-icon">X</span>
+                    <span class="logo-text">XenonAds</span>
+                </div>
+                <div class="welcome-msg">
+                    <p>Welcome back,</p>
+                    <h3 id="pub-name-display">Loading Publisher...</h3>
+                </div>
+            </header>
+
+            <div class="controls-area">
+                <div class="selector-box">
+                    <label for="site-selector">View Statistics for:</label>
+                    <select id="site-selector">
+                        </select>
+                </div>
+                <div class="timestamp" id="update-time">
+                    As of: Loading...
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="card">
+                    <div class="card-title">Estimated Earnings</div>
+                    <div class="card-value revenue-val" id="val-revenue">$0.00</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Ad Impressions</div>
+                    <div class="card-value" id="val-impressions">0</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Clicks</div>
+                    <div class="card-value" id="val-clicks">0</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Page CTR</div>
+                    <div class="card-value" id="val-ctr">0.00%</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Page eCPM</div>
+                    <div class="card-value" id="val-ecpm">$0.00</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="updated"><span class="pulse"></span> <span id="updatedText">Loading…</span></div>
-  </div>
 
-  <div id="summaryContainer"></div>
-  <div id="sitesContainer"><div class="loading">Loading data…</div></div>
+    <script>
+        // URL থেকে ?pub=... ভ্যালু নেওয়া
+        const urlParams = new URLSearchParams(window.location.search);
+        const pubCode = urlParams.get('pub');
 
-  <footer>
-    xenonads.io &nbsp;·&nbsp; Support: <a href="mailto:rahad@xenonads.io">rahad@xenonads.io</a>
-  </footer>
-</div>
+        const errorScreen = document.getElementById('error-screen');
+        const dashboardContent = document.getElementById('dashboard-content');
 
-<script>
-function fmtMoney(v){ return '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-function fmtNum(v){ return Number(v).toLocaleString('en-US'); }
-function timeAgo(iso){
-  const then = new Date(iso);
-  const diffMin = Math.round((Date.now() - then.getTime()) / 60000);
-  if(diffMin < 1) return 'Updated just now';
-  if(diffMin < 60) return 'Updated ' + diffMin + ' min ago';
-  const diffHr = Math.round(diffMin / 60);
-  return 'Updated ' + diffHr + ' hr ago';
-}
+        if (!pubCode || pubCode.trim() === "") {
+            showError("Access Denied", "No valid access token provided. Please check your dashboard link.");
+        } else {
+            // শুধুমাত্র নির্দিষ্ট পাবলিশারের ফাইল রিকোয়েস্ট করা
+            fetch(`./data/${pubCode}.json`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Invalid token");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    initDashboard(data);
+                })
+                .catch(err => {
+                    showError("Invalid Access Key", "The token provided in the link is incorrect or has expired.");
+                });
+        }
 
-async function loadDashboard(){
-  try{
-    const res = await fetch('dashboard_data.json?t=' + Date.now());
-    if(!res.ok) throw new Error('Data file not found');
-    const data = await res.json();
+        function showError(title, message) {
+            document.getElementById('error-title').innerText = title;
+            document.getElementById('error-desc').innerText = message;
+            errorScreen.classList.remove('hidden');
+            dashboardContent.classList.add('hidden');
+        }
 
-    document.getElementById('updatedText').textContent = timeAgo(data.generated_at);
+        function initDashboard(data) {
+            document.getElementById('pub-name-display').innerText = data.publisher_name;
+            
+            // টাইমস্ট্যাম্প ফরম্যাট করা
+            if(data.generated_at) {
+                const date = new Date(data.generated_at);
+                document.getElementById('update-time').innerText = `Hourly Update: ${date.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} (${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`;
+            }
 
-    const sites = data.sites || [];
-    const sitesContainer = document.getElementById('sitesContainer');
-    const summaryContainer = document.getElementById('summaryContainer');
+            const selector = document.getElementById('site-selector');
+            
+            // ড্রপডাউন রেডি করা
+            selector.innerHTML = '';
+            
+            // ১টির বেশি সাইট থাকলে 'All Sites' অপশন দেখানো
+            if (data.sites.length > 1) {
+                const allOpt = document.createElement('option');
+                allOpt.value = 'all';
+                allOpt.innerText = 'All Approved Sites (Combined)';
+                selector.appendChild(allOpt);
+            }
 
-    if(sites.length > 1){
-      const totalRevenue = sites.reduce((a,s)=>a+s.revenue,0);
-      const totalImpr = sites.reduce((a,s)=>a+s.impressions,0);
-      summaryContainer.innerHTML = `
-        <div class="summary">
-          <div class="item"><div class="label">Total Revenue</div><div class="value">${fmtMoney(totalRevenue)}</div></div>
-          <div class="item"><div class="label">Total Impressions</div><div class="value">${fmtNum(totalImpr)}</div></div>
-          <div class="item"><div class="label">Sites</div><div class="value">${sites.length}</div></div>
-        </div>`;
-    } else {
-      summaryContainer.innerHTML = '';
-    }
+            data.sites.forEach((site, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = site.site_name;
+                selector.appendChild(opt);
+            });
 
-    sitesContainer.innerHTML = sites.map(site => {
-      const isEmpty = site.impressions === 0;
-      return `
-        <div class="site-block">
-          <div class="site-head">
-            <h2>${site.site_name}</h2>
-            <div class="pub">${site.publisher_name}</div>
-          </div>
-          <div class="kpis">
-            <div class="kpi"><div class="label">Revenue</div><div class="value">${fmtMoney(site.revenue)}</div></div>
-            <div class="kpi"><div class="label">Impressions</div><div class="value">${fmtNum(site.impressions)}</div></div>
-            <div class="kpi"><div class="label">eCPM</div><div class="value">$${site.ecpm}</div></div>
-            <div class="kpi"><div class="label">CTR</div><div class="value">${site.ctr}%</div></div>
-          </div>
-          ${isEmpty ? `<div class="empty-note">No impressions recorded yet for this site — once it's live and approved, data will start appearing here automatically.</div>` : ''}
-        </div>`;
-    }).join('');
+            // ড্রপডাউন চেঞ্জ ইভেন্ট
+            selector.addEventListener('change', () => {
+                renderMetrics(data, selector.value);
+            });
 
-  } catch(err){
-    document.getElementById('sitesContainer').innerHTML =
-      `<div class="loading">Couldn't load data right now. Please try again shortly.</div>`;
-    document.getElementById('updatedText').textContent = 'Update status unavailable';
-    console.error(err);
-  }
-}
+            // শুরুতে প্রথম অপশন লোড করা
+            renderMetrics(data, selector.value);
+            
+            // ড্যাশবোর্ড স্ক্রিন শো করা
+            errorScreen.classList.add('hidden');
+            dashboardContent.classList.remove('hidden');
+        }
 
-loadDashboard();
-setInterval(loadDashboard, 5 * 60 * 1000);
-</script>
+        function renderMetrics(data, selection) {
+            let impressions = 0;
+            let clicks = 0;
+            let revenue = 0;
+            let ctr = 0;
+            let ecpm = 0;
+
+            if (selection === 'all') {
+                // সব সাইটের ডেটা যোগ করা (Combined)
+                data.sites.forEach(site => {
+                    impressions += site.impressions;
+                    clicks += site.clicks;
+                    revenue += site.revenue;
+                });
+                ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
+                ecpm = impressions > 0 ? (revenue / impressions * 1000) : 0;
+            } else {
+                // নির্দিষ্ট ১টি সাইটের ডেটা নেওয়া
+                const site = data.sites[parseInt(selection)];
+                impressions = site.impressions;
+                clicks = site.clicks;
+                revenue = site.revenue;
+                ctr = site.ctr;
+                ecpm = site.ecpm;
+            }
+
+            // স্ক্রিনে ডেটা বসানো
+            document.getElementById('val-revenue').innerText = `$${revenue.toFixed(2)}`;
+            document.getElementById('val-impressions').innerText = impressions.toLocaleString('en-US');
+            document.getElementById('val-clicks').innerText = clicks.toLocaleString('en-US');
+            document.getElementById('val-ctr').innerText = `${ctr.toFixed(2)}%`;
+            document.getElementById('val-ecpm').innerText = `$${ecpm.toFixed(2)}`;
+        }
+    </script>
 </body>
 </html>
