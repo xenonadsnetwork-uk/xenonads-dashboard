@@ -9,6 +9,7 @@ import csv
 import io
 from googleads import ad_manager
 
+# GitHub Secrets থেকে credentials সেটআপ করা
 if os.environ.get('GAM_KEY_JSON'):
     with open('gam-key.json', 'w', encoding='utf-8') as f:
         f.write(os.environ['GAM_KEY_JSON'])
@@ -21,6 +22,7 @@ if os.environ.get('GAM_KEY_JSON'):
     with open('googleads.yaml', 'w', encoding='utf-8') as f:
         f.write(yaml_content)
 
+# নতুন স্ট্রাকচারের config.json লোড করা
 with open('config.json', 'r', encoding='utf-8') as f:
     config = json.load(f)
 
@@ -54,6 +56,7 @@ print(f"Fetched {len(raw_rows)} rows from GAM.")
 
 totals_by_adunit = {}
 
+# পুরো নেটওয়ার্কের রিপোর্ট একবারে প্রসেস করা (Highly Efficient)
 for row in raw_rows:
     adunit_id = row.get('Dimension.AD_UNIT_ID', '')
     impressions = int(row.get('Column.AD_SERVER_IMPRESSIONS', 0) or 0)
@@ -68,29 +71,42 @@ for row in raw_rows:
     totals_by_adunit[adunit_id]['clicks'] += clicks
     totals_by_adunit[adunit_id]['revenue'] += revenue
 
-output = {'generated_at': datetime.datetime.now().isoformat(), 'sites': []}
+# ডেটা রাখার জন্য 'data' ফোল্ডার তৈরি করা (যদি না থাকে)
+os.makedirs('data', exist_ok=True)
+generated_time = datetime.datetime.now().isoformat()
 
-for site in config['sites']:
-    adunit_id = site['ad_unit_id']
-    margin = site['margin_share']
+# প্রতিটা পাবলিশারের জন্য আলাদা ফাইল তৈরি (Data Isolation)
+for publisher in config.get('publishers', []):
+    unique_code = publisher['unique_code']
+    pub_output = {
+        'generated_at': generated_time,
+        'publisher_name': publisher['publisher_name'],
+        'sites': []
+    }
+    
+    for site in publisher.get('sites', []):
+        adunit_id = site['ad_unit_id']
+        margin = site['margin_share']
 
-    raw = totals_by_adunit.get(adunit_id, {'impressions': 0, 'clicks': 0, 'revenue': 0.0})
+        raw = totals_by_adunit.get(adunit_id, {'impressions': 0, 'clicks': 0, 'revenue': 0.0})
 
-    final_revenue = round(raw['revenue'] * margin, 2)
-    ctr = round((raw['clicks'] / raw['impressions'] * 100), 2) if raw['impressions'] > 0 else 0
-    ecpm = round((final_revenue / raw['impressions'] * 1000), 2) if raw['impressions'] > 0 else 0
+        final_revenue = round(raw['revenue'] * margin, 2)
+        ctr = round((raw['clicks'] / raw['impressions'] * 100), 2) if raw['impressions'] > 0 else 0
+        ecpm = round((final_revenue / raw['impressions'] * 1000), 2) if raw['impressions'] > 0 else 0
 
-    output['sites'].append({
-        'publisher_name': site['publisher_name'],
-        'site_name': site['site_name'],
-        'impressions': raw['impressions'],
-        'clicks': raw['clicks'],
-        'revenue': final_revenue,
-        'ctr': ctr,
-        'ecpm': ecpm
-    })
+        pub_output['sites'].append({
+            'site_name': site['site_name'],
+            'impressions': raw['impressions'],
+            'clicks': raw['clicks'],
+            'revenue': final_revenue,
+            'ctr': ctr,
+            'ecpm': ecpm
+        })
+        
+    # পাবলিশারের নিজস্ব সিক্রেট কোড দিয়ে ফাইল রাইট করা
+    file_path = f'data/{unique_code}.json'
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(pub_output, f, indent=2, ensure_ascii=False)
+    print(f"Saved isolated data for {publisher['publisher_name']} to {file_path}")
 
-with open('dashboard_data.json', 'w', encoding='utf-8') as f:
-    json.dump(output, f, indent=2, ensure_ascii=False)
-
-print("Done! Data saved to dashboard_data.json")
+print("All reports generated successfully!")
