@@ -1,22 +1,72 @@
 {
-  "generated_at": "2026-07-09T19:09:37.346397",
+  "generated_at": "2026-07-09T19:18:49.439053",
   "publisher_name": "Publisher A",
   "sites": [
     {
       "site_name": "Site A1",
-      "impressions": 0,
-      "clicks": 0,
-      "revenue": 0.0,
-      "ctr": 0,
-      "ecpm": 0
+      "periods": {
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
+      }
     },
     {
       "site_name": "Site A2",
-      "impressions": 0,
-      "clicks": 0,
-      "revenue": 0.0,
-      "ctr": 0,
-      "ecpm": 0
+      "periods": {
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
+      }
     }
   ]
 }
