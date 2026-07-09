@@ -1,11 +1,22 @@
 {
-  "sites": [
+  "publishers": [
     {
+      "publisher_id": "pub_001",
+      "unique_code": "a8f3k29x7q",
       "publisher_name": "Publisher A",
       "publisher_email": "example@publisher.com",
-      "site_name": "Site A",
-      "ad_unit_id": "PLACEHOLDER_ID_1",
-      "margin_share": 0.90
+      "sites": [
+        {
+          "site_name": "Site A1",
+          "ad_unit_id": "PLACEHOLDER_ID_1",
+          "margin_share": 0.90
+        },
+        {
+          "site_name": "Site A2",
+          "ad_unit_id": "PLACEHOLDER_ID_2",
+          "margin_share": 0.90
+        }
+      ]
     }
   ]
 }
