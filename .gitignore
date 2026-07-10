@@ -1,0 +1,6 @@
+gam-key.json
+googleads.yaml
+server.log
+__pycache__/
+data/
+*.txt
