@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-07-10T16:46:40.499958",
+  "publisher_id": "pub_001",
+  "publisher_name": "Publisher A",
+  "sites": [
+    {
+      "site_name": "Site A1",
+      "ad_unit_id": "23356538919",
+      "periods": {
+        "daily": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
+      }
+    },
+    {
+      "site_name": "Site A2",
+      "ad_unit_id": "23357569058",
+      "periods": {
+        "daily": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
+      }
+    }
+  ],
+  "totals": {
+    "daily": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "3days": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "weekly": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "monthly": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "3months": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    }
+  }
+}
