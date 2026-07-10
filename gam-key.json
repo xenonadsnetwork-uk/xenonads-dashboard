@@ -1,13 +1,1 @@
-{
-  "type": "service_account",
-  "project_id": "xenonads-gam-dashboard",
-  "private_key_id": "986ec96d7a50ff3531fab1cb56ce5249c8a13d01",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQDI6r1/7FU+m1r8\nRsBkpuuMcb1KF9y2esFXWko2CYMFkke85f5mhQJ/+P1s4oWcOIOREwa6aVqPZvoA\n3I8/toroJg+xvJ1Flt1pQz9PlB7T76zvg2Y4u4UWPMVcbvCpN/SJ8pl0dEGiHoRf\nqebaLHxbBas+FT8mv378pKCt2UHRV8yRRE2O8Myxr3fzSp9i6OsxteSXjA4bkKgA\n5bRWHFRVdXaqSxcW8h9OWgKzuHEdY9lh8SQcYTjDJPTZDTcz0I03ZY4jnLU8/kTd\nvaLruSWLZSFRYGUwuJC5f9gnh2ldh0q92RvY8Znrs9GyjCR1SBORYRw3fybf0Gje\nK/qARxDTAgMBAAECgf8J0+NrYU6zY2jZ4tT4IsuswILOnQEr90FKm1Bg/vP6zBkL\njaCRiwbKUnd/EgdD3mNd61SZRtfxIGUrROiVEETdSVpZCoL2hpVN+hAFIUfjmN40\n2Qg1O11VZqOWF+3g4aXCCJYpXYZsQrErivlWkIyKWQlwi1ru/uZtTWdQE/hJMSe9\nGAlzb94lTlOGr1NB/yTzrunHWCE93YEvTlT/JGSbW26WRZI2U7XJ0z7oj9UEL5qy\nKnYZl5naxXkjhMNyZglHrR79g8JSd9hlL03NO3MzYbl0YIZeXelXR624GF0L7e4s\nh3NcRd9TV6pYjv60VlbNi2FoMwR4sHObhvLvHykCgYEA82NHcLa5JKojdQkZzpMx\nXYgLqMoRli705CVW/ZpmFmbpygjnFBW3sjeCBkCg6Y33KvuDzOIs4PRFgGeunWZw\n8ASIMltYq9zb1HsbdIS2LNbrz2l/Rfid/0ODoQh70q3JbyTY6kpOhPNM9LbNG6wZ\nEFs78FOuX8L036eOdT1ME1kCgYEA01QNt5WDmO/HaoWP2e8SJKKDbEhUIeT8RE+k\nZ2dI92vREfIuH7nw06y5Tf26BdkbZLfnSSk1r6sX5vKPKoWwJMrM+3jwzG1vM1ko\n5je06QokiFxgvxvhDRl7P4tAaqx63VijA26UyDlKp2LWRt93uFa8yzTeIh4VN0bz\nXWT4nAsCgYEA66buXsWsUUGifwjGwepmW6cDkvPDP2RLnDJDHdzGh14xcnpYMmws\nphN0g1VD956K+ET6Af/jcBNSz9aTjLbJFrtsm0Uyf4SiHALuPEzajmOxgeslXbww\nTh0yb1JlgUDezgwhMgesKrHfivkLcoWY5utPB4weQ33h1kLHfeBRrlECgYBLabRX\nbhB/FBoKpkz2TX0g+6mAi7MSQV/QlMcra007lgsOp2jUQ4twTjP2Y/PtQFOpNoNf\ntUgGPz0RWj/CweBg0Mojdz4fBXJoVYnl1b1GaCsvSh/wMue1wAEeZPgA2TojIQ1T\nHTQU23ULlJa4xeg4LSPENEKM1EVn63bPPkgFjwKBgGUEKhP29ClEdhdhA5K8TfRE\nhhS5pv4iesfRcQK/FfO9R3mnr5JNKijLOdyFTfc1LZ/kSo53ziX/Sq2DU+gDLY0N\nkNr2dLdmdkwnBTaVyhJyi0tKZj29/5gVGhYuZofxnnRv8NgCZo3iGobuAP+8aTtf\nJoW5M7vPVqmaPADXdB+3\n-----END PRIVATE KEY-----\n",
-  "client_email": "gam-reporter@xenonads-gam-dashboard.iam.gserviceaccount.com",
-  "client_id": "104639634680301594248",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gam-reporter%40xenonads-gam-dashboard.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
+
