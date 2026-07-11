@@ -1,41 +1,166 @@
 {
-  "generated_at": "2026-07-11T00:00:00",
+  "generated_at": "2026-07-11T11:40:51.437739",
   "publisher_id": "pub_001",
   "publisher_name": "Publisher A",
+  "publisher_email": "publisher.a@xenonads.io",
   "sites": [
     {
       "site_name": "Site A1",
       "ad_unit_id": "23356538919",
-      "margin_share": 0.90,
+      "margin_share": 0.9,
       "periods": {
-        "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+        "daily": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
       },
-      "daily_chart": []
+      "daily_chart": [],
+      "daily_breakdown": []
     },
     {
       "site_name": "Site A2",
       "ad_unit_id": "23357569058",
       "margin_share": 0.85,
       "periods": {
-        "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+        "daily": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
       },
-      "daily_chart": []
+      "daily_chart": [],
+      "daily_breakdown": []
     }
   ],
   "totals": {
-    "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+    "daily": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "3days": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "weekly": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "monthly": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "3months": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    }
   },
-  "daily_chart": []
+  "comparison": {
+    "daily_vs_yesterday": {
+      "impressions_change": 0,
+      "revenue_change": 0,
+      "clicks_change": 0,
+      "ecpm_change": 0
+    },
+    "weekly_vs_last_week": {
+      "impressions_change": 0,
+      "revenue_change": 0,
+      "clicks_change": 0
+    },
+    "monthly_vs_last_month": {
+      "impressions_change": 0,
+      "revenue_change": 0,
+      "clicks_change": 0
+    }
+  },
+  "daily_chart": [],
+  "daily_breakdown": [],
+  "device_breakdown": {},
+  "geo_breakdown": [],
+  "site_revenue_breakdown": [
+    {
+      "site_name": "Site A1",
+      "revenue": 0.0
+    },
+    {
+      "site_name": "Site A2",
+      "revenue": 0.0
+    }
+  ],
+  "viewability": 0
 }
