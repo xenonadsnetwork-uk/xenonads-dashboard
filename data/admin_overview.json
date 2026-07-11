@@ -1,21 +1,88 @@
 {
-  "generated_at": "2026-07-11T00:00:00",
+  "generated_at": "2026-07-11T14:48:46.610895",
   "publishers": [
     {
       "publisher_id": "pub_001",
       "publisher_name": "Publisher A",
+      "totals": {
+        "daily": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3days": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "weekly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "monthly": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        },
+        "3months": {
+          "impressions": 0,
+          "clicks": 0,
+          "revenue": 0.0,
+          "ctr": 0,
+          "ecpm": 0
+        }
+      },
       "site_count": 2,
       "sites": [
         {
           "site_name": "Site A1",
           "ad_unit_id": "23356538919",
-          "margin_share": 0.90,
+          "margin_share": 0.9,
           "periods": {
-            "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+            "daily": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "3days": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "weekly": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "monthly": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "3months": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            }
           }
         },
         {
@@ -23,29 +90,109 @@
           "ad_unit_id": "23357569058",
           "margin_share": 0.85,
           "periods": {
-            "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-            "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+            "daily": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "3days": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "weekly": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "monthly": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            },
+            "3months": {
+              "impressions": 0,
+              "clicks": 0,
+              "revenue": 0.0,
+              "ctr": 0,
+              "ecpm": 0
+            }
           }
         }
       ],
-      "totals": {
-        "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-        "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+      "comparison": {
+        "daily_vs_yesterday": {
+          "impressions_change": 0,
+          "revenue_change": 0,
+          "clicks_change": 0,
+          "ecpm_change": 0
+        },
+        "weekly_vs_last_week": {
+          "impressions_change": 0,
+          "revenue_change": 0,
+          "clicks_change": 0
+        },
+        "monthly_vs_last_month": {
+          "impressions_change": 0,
+          "revenue_change": 0,
+          "clicks_change": 0
+        }
       }
     }
   ],
+  "network_daily_chart": [],
   "network_totals": {
-    "daily": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "3days": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "weekly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "monthly": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0},
-    "3months": {"impressions": 0, "clicks": 0, "revenue": 0.0, "ctr": 0, "ecpm": 0}
+    "daily": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "3days": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "weekly": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "monthly": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    },
+    "3months": {
+      "impressions": 0,
+      "clicks": 0,
+      "revenue": 0.0,
+      "ctr": 0,
+      "ecpm": 0
+    }
   },
-  "network_daily_chart": []
+  "comparison": {
+    "daily_vs_yesterday": {
+      "impressions_change": 0,
+      "revenue_change": 0,
+      "clicks_change": 0
+    }
+  },
+  "device_breakdown": {},
+  "geo_breakdown": []
 }
